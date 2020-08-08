@@ -2,7 +2,6 @@
 //#include <ArduinoSTL.h>
 #include <FastLED.h>
 
-#define BRIGHTNESS     40
 #define COLOR_ORDER    BRG
 #define LED_TYPE       WS2811
 #define NUM_LEDS       37
@@ -27,6 +26,8 @@
 #define LED_PIN_C1    48
 #define LED_PIN_C2    50
 #define LED_PIN_C3    52
+
+int BRIGHTNESS = 255;
 
 CRGB LED_STRIPS[9][NUM_LEDS];
 
@@ -253,4 +254,15 @@ void undoLastTurn() {
     turnList[turnCount-1] = -1;
     cellsState[cellIndex] = 0;
     turnCount--;
+}
+
+int changeBrightness(int brightnessLevel) {
+    if (brightnessLevel == 1) {
+        BRIGHTNESS = 45;
+    } else if (brightnessLevel == 2) {
+        BRIGHTNESS = 145;
+    } else if (brightnessLevel == 3) {
+        BRIGHTNESS = 255;
+    }
+    FastLED.setBrightness(BRIGHTNESS);
 }
