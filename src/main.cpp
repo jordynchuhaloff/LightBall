@@ -1,5 +1,6 @@
 #include "Arduino.h"
 //#include <ArduinoSTL.h>
+#include <screen.h>
 #include <FastLED.h>
 
 #define COLOR_ORDER    BRG
@@ -79,6 +80,7 @@ void setup()
     CFastLED::addLeds<LED_TYPE, LED_PIN_C2, COLOR_ORDER>(LED_STRIPS[7], NUM_LEDS).setCorrection( TypicalLEDStrip );
     CFastLED::addLeds<LED_TYPE, LED_PIN_C3, COLOR_ORDER>(LED_STRIPS[8], NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
+    setupScreen();
 
 }
 
@@ -177,6 +179,7 @@ void handleCellTriggered(int cellIndex, bool isUndo) {
         CRGB color = getCurrentPlayerColor();
         setCellColor(cellIndex, color);
         recordTurn(cellIndex);
+        drawMove(cellsState);
         printTurnMatrix();
         checkWinConditions();
 
@@ -188,6 +191,7 @@ void handleCellTriggered(int cellIndex, bool isUndo) {
 
 void loop()
 {
+    loopScreen();
     unsigned long currentMillis = millis();
 
     if (gameWon && celebrateCount == 0) { // game won, celebration complete
