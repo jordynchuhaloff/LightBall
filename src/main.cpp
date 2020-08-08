@@ -37,6 +37,7 @@ CRGB COLOR_OFF = CRGB(0x000000);
 unsigned long previousMillis = 0; // time at start of program
 int cellsState[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // 0 == unclaimed | 1 == player 1 | 2 == player 2
 int turnCount = 0;
+int turnList[9] = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
 int winConditions[8][3] =
     {
@@ -116,6 +117,7 @@ void recordTurn(int cellIndex) {
         Serial.println("Player 2");
         cellsState[cellIndex] = 2;
     }
+    turnList[turnCount] = cellIndex;
 }
 
 void printTurnMatrix() {
@@ -164,20 +166,22 @@ void checkWinConditions() {
     Serial.println();
 }
 
-void handleCellTriggered(int cellIndex) {
-    if (cellsState[cellIndex] != 0) { // cell is already claimed
-        return;
-    }
+void handleCellTriggered(int cellIndex, bool isUndo) {
+    if (isUndo) {
+        setCellColor(cellIndex, COLOR_OFF);
+    } else {
+        if (cellsState[cellIndex] != 0) { // cell is already claimed
+            return;
+        }
+        CRGB color = getCurrentPlayerColor();
+        setCellColor(cellIndex, color);
+        recordTurn(cellIndex);
+        printTurnMatrix();
+        checkWinConditions();
 
-    CRGB color = getCurrentPlayerColor();
-
-    setCellColor(cellIndex, color);
-    recordTurn(cellIndex);
-    printTurnMatrix();
-    checkWinConditions();
-
-    if (!gameWon) {
-        turnCount++;
+        if (!gameWon) {
+            turnCount++;
+        }
     }
 }
 
@@ -208,36 +212,45 @@ void loop()
             return;
         } else {
             if (A1Triggered != 0) {
-                handleCellTriggered(0);
+                handleCellTriggered(0, false);
             }
             if (A2Triggered != 0) {
-                handleCellTriggered(1);
+                handleCellTriggered(1, false);
             }
             if (A3Triggered != 0) {
-                handleCellTriggered(2);
+                handleCellTriggered(2, false);
             }
 
             if (B1Triggered != 0) {
-                handleCellTriggered(3);
+                handleCellTriggered(3, false);
             }
             if (B2Triggered != 0) {
-                handleCellTriggered(4);
+                handleCellTriggered(4, false);
             }
             if (B3Triggered != 0) {
-                handleCellTriggered(5);
+                handleCellTriggered(5, false);
             }
 
             if (C1Triggered != 0) {
-                handleCellTriggered(6);
+                handleCellTriggered(6, false);
             }
             if (C2Triggered != 0) {
-                handleCellTriggered(7);
+                handleCellTriggered(7, false);
             }
             if (C3Triggered != 0) {
-                handleCellTriggered(8);
+                handleCellTriggered(8, false);
             }
         }
     }
 
     FastLED.show();
+}
+
+void undoLastTurn() {
+    int cellIndex = turnList[turnCount-1];
+    Serial.println((String)" Undoing last turn at cellIndex: " + cellIndex + " ");
+    handleCellTriggered(cellIndex, true);
+    turnList[turnCount-1] = -1;
+    cellsState[cellIndex] = 0;
+    turnCount--;
 }
