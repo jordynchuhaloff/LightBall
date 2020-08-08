@@ -8,16 +8,6 @@
 #define NUM_LEDS       37
 #define NUM_SQUARES    9
 
-#define LASER_A1    18
-#define LASER_A2    19
-#define LASER_A3    20
-#define LASER_B1    21
-#define LASER_B2    22
-#define LASER_B3    23
-#define LASER_C1    24
-#define LASER_C2    25
-#define LASER_C3    26
-
 #define DETECTOR_A1    4
 #define DETECTOR_A2    3
 #define DETECTOR_A3    2
@@ -66,15 +56,6 @@ int wonConditionIndex; // which winCondition won the game
 void setup()
 {
     Serial.begin(9600);
-    pinMode(LASER_A1, OUTPUT);
-    pinMode(LASER_A2, OUTPUT);
-    pinMode(LASER_A3, OUTPUT);
-    pinMode(LASER_B1, OUTPUT);
-    pinMode(LASER_B2, OUTPUT);
-    pinMode(LASER_B3, OUTPUT);
-    pinMode(LASER_C1, OUTPUT);
-    pinMode(LASER_C2, OUTPUT);
-    pinMode(LASER_C3, OUTPUT);
 
     pinMode(DETECTOR_A1, INPUT);
     pinMode(DETECTOR_A2, INPUT);
@@ -97,15 +78,6 @@ void setup()
     CFastLED::addLeds<LED_TYPE, LED_PIN_C3, COLOR_ORDER>(LED_STRIPS[8], NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
 
-    digitalWrite(LASER_A1, HIGH);
-    digitalWrite(LASER_A2, HIGH);
-    digitalWrite(LASER_A3, HIGH);
-    digitalWrite(LASER_B1, HIGH);
-    digitalWrite(LASER_B2, HIGH);
-    digitalWrite(LASER_B3, HIGH);
-    digitalWrite(LASER_C1, HIGH);
-    digitalWrite(LASER_C2, HIGH);
-    digitalWrite(LASER_C3, HIGH);
 }
 
 CRGB getCurrentPlayerColor() {
