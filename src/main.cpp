@@ -2,6 +2,7 @@
 //#include <ArduinoSTL.h>
 #include <screen.h>
 #include <FastLED.h>
+#include <server_comm.h>
 
 #define COLOR_ORDER    BRG
 #define LED_TYPE       WS2811
@@ -58,7 +59,8 @@ int wonConditionIndex; // which winCondition won the game
 
 void setup()
 {
-    Serial.begin(9600);
+    Serial.begin(57600);
+    Serial1.begin(9600);
 
     pinMode(DETECTOR_A1, INPUT);
     pinMode(DETECTOR_A2, INPUT);
@@ -81,7 +83,6 @@ void setup()
     CFastLED::addLeds<LED_TYPE, LED_PIN_C3, COLOR_ORDER>(LED_STRIPS[8], NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
     setupScreen();
-
 }
 
 CRGB getCurrentPlayerColor() {
@@ -192,6 +193,7 @@ void handleCellTriggered(int cellIndex, bool isUndo) {
 void loop()
 {
     loopScreen();
+    loopServer();
     unsigned long currentMillis = millis();
 
     if (gameWon && celebrateCount == 0) { // game won, celebration complete
