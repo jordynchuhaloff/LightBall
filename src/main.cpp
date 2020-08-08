@@ -8,25 +8,25 @@
 #define NUM_LEDS       37
 #define NUM_SQUARES    9
 
-#define DETECTOR_A1    4
-#define DETECTOR_A2    3
-#define DETECTOR_A3    2
-#define DETECTOR_B1    31
-#define DETECTOR_B2    0
-#define DETECTOR_B3    14
-#define DETECTOR_C1    15
-#define DETECTOR_C2    16
-#define DETECTOR_C3    17
+#define DETECTOR_A1    22
+#define DETECTOR_A2    23
+#define DETECTOR_A3    24
+#define DETECTOR_B1    25
+#define DETECTOR_B2    26
+#define DETECTOR_B3    27
+#define DETECTOR_C1    28
+#define DETECTOR_C2    29
+#define DETECTOR_C3    30
 
-#define LED_PIN_A1    13
-#define LED_PIN_A2    12
-#define LED_PIN_A3    11
-#define LED_PIN_B1    10
-#define LED_PIN_B2    9
-#define LED_PIN_B3    8
-#define LED_PIN_C1    7
-#define LED_PIN_C2    6
-#define LED_PIN_C3    5
+#define LED_PIN_A1    36
+#define LED_PIN_A2    38
+#define LED_PIN_A3    40
+#define LED_PIN_B1    42
+#define LED_PIN_B2    44
+#define LED_PIN_B3    46
+#define LED_PIN_C1    48
+#define LED_PIN_C2    50
+#define LED_PIN_C3    52
 
 CRGB LED_STRIPS[9][NUM_LEDS];
 
