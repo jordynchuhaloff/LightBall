@@ -266,3 +266,12 @@ int changeBrightness(int brightnessLevel) {
     }
     FastLED.setBrightness(BRIGHTNESS);
 }
+
+int resetGame() {
+    gameWon = false;
+    turnCount = 0;
+    for (int i = 0; i < 9; i++) {
+        setCellColor(i, COLOR_OFF);
+        cellsState[i] = 0;
+    }
+}
