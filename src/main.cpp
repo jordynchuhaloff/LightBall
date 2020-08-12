@@ -257,13 +257,19 @@ void loop()
 }
 
 void undoLastTurn() {
-    int cellIndex = turnList[turnCount-1];
-    Serial.println((String)" Undoing last turn at cellIndex: " + cellIndex + " ");
-    handleCellTriggered(cellIndex, true);
-    turnList[turnCount-1] = -1;
-    cellsState[cellIndex] = 0;
-    turnCount--;
-    playUndoSound();
+    Serial.println("Undo Last Turn");
+    if (turnCount > 0) {
+        Serial.println((String)"Undo Last Turn. turncount: "+ turnCount);
+        int cellIndex = turnList[turnCount - 1];
+        Serial.println((String) " Undoing last turn at cellIndex: " + cellIndex + " ");
+        playUndoSound();
+        handleCellTriggered(cellIndex, true);
+        turnList[turnCount - 1] = -1;
+        cellsState[cellIndex] = 0;
+        turnCount--;
+        delay(500);
+        setUndoing(false);
+    }
 }
 
 int changeBrightness(int brightnessLevel) {

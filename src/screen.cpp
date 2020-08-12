@@ -81,6 +81,9 @@ const uint16_t TXT_X = my_lcd.Get_Display_Width()/2;
 
 uint8_t currentGameMode = 1;
 uint8_t currentBrightness = 3;
+
+bool isUndoing = false;
+
 const uint8_t CHECK_WIDTH = 30;
 const uint8_t CHECK_HEIGHT = 30;
 const uint8_t CHECK_GAP = 80;
@@ -249,9 +252,9 @@ void show_game_on_menu()
 
     my_lcd.Set_Draw_color(GREEN);
     my_lcd.Fill_Round_Rectangle(BTN_BACK_X1, BTN_BACK_Y1, BTN_BACK_X2, BTN_BACK_Y2, BTN_ROUNDNESS);
+    my_lcd.Fill_Round_Rectangle(BTN_BACK_X1, BTN_UNDO_Y1, BTN_BACK_X2, BTN_UNDO_Y2, BTN_ROUNDNESS);
     show_string((char *)"END GAME", TXT_BACK_BTN_X - 30, TXT_BACK_BTN_Y, 2, BLACK, BLACK, true);
-    if (currentBrightness == 1) {
-    }
+    show_string((char *)"UNDO MOVE", TXT_BACK_BTN_X - 30, TXT_UNDO_BTN_Y, 2, BLACK, BLACK, true);
 }
 
 int drawMove(int cellsState[9]) {
@@ -331,6 +334,10 @@ int setupScreen()
     show_main_menu_moc();
     pinMode(13, OUTPUT);
     // printf("Hello World\n");
+}
+
+void setUndoing(bool undoing) {
+    isUndoing = undoing;
 }
 
 int loopScreen()
@@ -436,6 +443,13 @@ int loopScreen()
                 flag_gameon = 0;
                 show_flag = true;
                 goto comme;
+            } else if (p.x >= BTN_BACK_X1 && p.y >= BTN_UNDO_Y1 && p.x <= BTN_BACK_X2 && p.y <= BTN_UNDO_Y2)
+            {
+                if (isUndoing == false) {
+                    isUndoing = true;
+                    undoLastTurn();
+                    Serial.println("Screen -> undoLastTurn()");
+                }
             }
         }
 
