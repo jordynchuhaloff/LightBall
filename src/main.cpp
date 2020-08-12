@@ -3,6 +3,7 @@
 #include <screen.h>
 #include <FastLED.h>
 #include <server_comm.h>
+#include "speaker.h"
 
 #define COLOR_ORDER    BRG
 #define LED_TYPE       WS2811
@@ -83,6 +84,7 @@ void setup()
     CFastLED::addLeds<LED_TYPE, LED_PIN_C3, COLOR_ORDER>(LED_STRIPS[8], NUM_LEDS).setCorrection( TypicalLEDStrip );
     FastLED.setBrightness(  BRIGHTNESS );
     setupScreen();
+    setupSpeaker();
 }
 
 CRGB getCurrentPlayerColor() {
@@ -162,6 +164,7 @@ void checkWinConditions() {
                 gameWon = true;
                 celebrateCount = 10;
                 wonConditionIndex = i;
+                playWinSound();
                 return;
             }
         }
@@ -175,6 +178,7 @@ void handleCellTriggered(int cellIndex, bool isUndo) {
     if (isUndo) {
         setCellColor(cellIndex, COLOR_OFF);
     } else {
+        playCellTriggeredSound();
         if (cellsState[cellIndex] != 0) { // cell is already claimed
             return;
         }
@@ -259,6 +263,7 @@ void undoLastTurn() {
     turnList[turnCount-1] = -1;
     cellsState[cellIndex] = 0;
     turnCount--;
+    playUndoSound();
 }
 
 int changeBrightness(int brightnessLevel) {
@@ -279,4 +284,5 @@ int resetGame() {
         setCellColor(i, COLOR_OFF);
         cellsState[i] = 0;
     }
+    resetMusic();
 }

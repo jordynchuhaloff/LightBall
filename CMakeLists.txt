@@ -30,4 +30,4 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/main.h src/screen.h src/screen.cpp src/server_comm.cpp src/server_comm.h)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/main.h src/screen.h src/screen.cpp src/server_comm.cpp src/server_comm.h src/speaker.cpp src/speaker.h)
