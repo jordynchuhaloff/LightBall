@@ -97,6 +97,7 @@ void setCellColor(int cellIndex, const CRGB& color) {
     for( int i = 0; i < NUM_LEDS; i++) {
         LED_STRIPS[cellIndex][i] = color;
     }
+    FastLED.show();
 }
 
 void celebrate() {
@@ -249,8 +250,6 @@ void loop()
             }
         }
     }
-
-    FastLED.show();
 }
 
 void undoLastTurn() {
