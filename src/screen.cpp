@@ -48,103 +48,107 @@ int16_t flag_pen;
 int16_t flag_gameon;
 boolean show_flag = true;
 
-int BUTTON_GAP = 5;
-int BTN_ROUNDNESS = 5;
-int BUTTON_HEIGHT = 80;
-int BTN_X1 = BUTTON_GAP;
-int BTN_X2 = my_lcd.Get_Display_Width() - BUTTON_GAP;
-int BTN_START_Y1 = BUTTON_GAP;
-int BTN_START_Y2 = BTN_START_Y1 + BUTTON_HEIGHT;
-int BTN_GAMEMODE_Y1 = BTN_START_Y2 + BUTTON_GAP;
-int BTN_GAMEMODE_Y2 = BTN_GAMEMODE_Y1 + BUTTON_HEIGHT;
-int BTN_BRIGHTNESS_Y1 = BTN_GAMEMODE_Y2 + BUTTON_GAP;
-int BTN_BRIGHTNESS_Y2 = BTN_BRIGHTNESS_Y1 + BUTTON_HEIGHT;
+const uint8_t BUTTON_GAP = 5;
+const uint8_t BTN_ROUNDNESS = 5;
+const uint8_t BUTTON_HEIGHT = 80;
+const uint8_t BTN_X1 = BUTTON_GAP;
+const uint16_t BTN_X2 = my_lcd.Get_Display_Width() - BUTTON_GAP;
+const uint16_t BTN_START_Y1 = BUTTON_GAP;
+const uint16_t BTN_START_Y2 = BTN_START_Y1 + BUTTON_HEIGHT;
+const uint16_t BTN_GAMEMODE_Y1 = BTN_START_Y2 + BUTTON_GAP;
+const uint16_t BTN_GAMEMODE_Y2 = BTN_GAMEMODE_Y1 + BUTTON_HEIGHT;
+const uint16_t BTN_BRIGHTNESS_Y1 = BTN_GAMEMODE_Y2 + BUTTON_GAP;
+const uint16_t BTN_BRIGHTNESS_Y2 = BTN_BRIGHTNESS_Y1 + BUTTON_HEIGHT;
 
-int BTN_BACK_HEIGHT = 40;
-int BTN_BACK_X1 = 20;
-int BTN_BACK_X2 = my_lcd.Get_Display_Width() - 20;
-int BTN_BACK_Y1 = my_lcd.Get_Display_Height() - BTN_BACK_HEIGHT- BUTTON_GAP;
-int BTN_BACK_Y2 = my_lcd.Get_Display_Height() - BUTTON_GAP;
-int TXT_BACK_BTN_X = (my_lcd.Get_Display_Width()/2) - 20;
-int TXT_BACK_BTN_Y = BTN_BACK_Y1 + ((BTN_BACK_Y2 - BTN_BACK_Y1)/2) - 5;
+const uint8_t BTN_BACK_HEIGHT = 40;
+const uint8_t BTN_BACK_X1 = 20;
+const uint16_t BTN_BACK_X2 = my_lcd.Get_Display_Width() - 20;
+const uint16_t BTN_BACK_Y1 = my_lcd.Get_Display_Height() - BTN_BACK_HEIGHT- BUTTON_GAP;
+const uint16_t BTN_BACK_Y2 = my_lcd.Get_Display_Height() - BUTTON_GAP;
+const uint16_t TXT_BACK_BTN_X = (my_lcd.Get_Display_Width()/2) - 20;
+const uint16_t TXT_BACK_BTN_Y = BTN_BACK_Y1 + ((BTN_BACK_Y2 - BTN_BACK_Y1)/2) - 5;
 
-int TXT_HEIGHT_OFFSET = 5;
-int TXT_GAMEMODE_Y = BTN_GAMEMODE_Y1 + ((BTN_GAMEMODE_Y2 - BTN_GAMEMODE_Y1)/2) - TXT_HEIGHT_OFFSET;
-int TXT_START_Y = BTN_START_Y1 + ((BTN_START_Y2 - BTN_START_Y1)/2) - TXT_HEIGHT_OFFSET;
-int TXT_BRIGHTNESS_Y = BTN_BRIGHTNESS_Y1 + ((BTN_BRIGHTNESS_Y2 - BTN_BRIGHTNESS_Y1)/2) - TXT_HEIGHT_OFFSET;
-int TXT_X = my_lcd.Get_Display_Width()/2;
+const uint16_t BTN_UNDO_Y1 = BTN_BACK_Y1 - BTN_BACK_HEIGHT - BUTTON_GAP;
+const uint16_t BTN_UNDO_Y2 = BTN_BACK_Y1 - BUTTON_GAP;
+const uint16_t TXT_UNO_BTN_X = (my_lcd.Get_Display_Width()/2) - 20;
+const uint16_t TXT_UNDO_BTN_Y = BTN_UNDO_Y1 + ((BTN_UNDO_Y2 - BTN_UNDO_Y1)/2) - 5;
 
-int currentGameMode = 1;
-int currentBrightness = 3;
-int CHECK_WIDTH = 30;
-int CHECK_HEIGHT = 30;
-int CHECK_GAP = 80;
-int CHECK_X1 = 10;
-int CHECK_X2 = CHECK_X1 + CHECK_WIDTH;
-int CHECK1_Y1 = 10;
-int CHECK1_Y2 = CHECK1_Y1 + CHECK_HEIGHT;
-int CHECK2_Y1 = CHECK1_Y2 + CHECK_GAP;
-int CHECK2_Y2 = CHECK2_Y1 + CHECK_HEIGHT;
-int CHECK3_Y1 = CHECK2_Y2 + CHECK_GAP;
-int CHECK3_Y2 = CHECK3_Y1 + CHECK_HEIGHT;
+const uint8_t TXT_HEIGHT_OFFSET = 5;
+const uint16_t TXT_GAMEMODE_Y = BTN_GAMEMODE_Y1 + ((BTN_GAMEMODE_Y2 - BTN_GAMEMODE_Y1)/2) - TXT_HEIGHT_OFFSET;
+const uint16_t TXT_START_Y = BTN_START_Y1 + ((BTN_START_Y2 - BTN_START_Y1)/2) - TXT_HEIGHT_OFFSET;
+const uint16_t TXT_BRIGHTNESS_Y = BTN_BRIGHTNESS_Y1 + ((BTN_BRIGHTNESS_Y2 - BTN_BRIGHTNESS_Y1)/2) - TXT_HEIGHT_OFFSET;
+const uint16_t TXT_X = my_lcd.Get_Display_Width()/2;
 
-int CHECK_TEXT_X = CHECK_WIDTH/2 + 5;
-int CHECK1_TEXT_Y = CHECK1_Y1 + 8;
-int CHECK2_TEXT_Y = CHECK2_Y1 + 8;
-int CHECK3_TEXT_Y = CHECK3_Y1 + 8;
-int CHECK_TEXT_LINE_OFFSET = 20;
+uint8_t currentGameMode = 1;
+uint8_t currentBrightness = 3;
+const uint8_t CHECK_WIDTH = 30;
+const uint8_t CHECK_HEIGHT = 30;
+const uint8_t CHECK_GAP = 80;
+const uint8_t CHECK_X1 = 10;
+const uint8_t CHECK_X2 = CHECK_X1 + CHECK_WIDTH;
+const uint8_t CHECK1_Y1 = 10;
+const uint16_t CHECK1_Y2 = CHECK1_Y1 + CHECK_HEIGHT;
+const uint16_t CHECK2_Y1 = CHECK1_Y2 + CHECK_GAP;
+const uint16_t CHECK2_Y2 = CHECK2_Y1 + CHECK_HEIGHT;
+const uint16_t CHECK3_Y1 = CHECK2_Y2 + CHECK_GAP;
+const uint16_t CHECK3_Y2 = CHECK3_Y1 + CHECK_HEIGHT;
+
+const uint16_t CHECK_TEXT_X = CHECK_WIDTH/2 + 5;
+const uint16_t CHECK1_TEXT_Y = CHECK1_Y1 + 8;
+const uint16_t CHECK2_TEXT_Y = CHECK2_Y1 + 8;
+const uint16_t CHECK3_TEXT_Y = CHECK3_Y1 + 8;
+const uint8_t CHECK_TEXT_LINE_OFFSET = 20;
 
 /**GAME STARTED MENU -- BELOW DRAWS THE GAME BOARD*/
 //show game on menu
-int CELL_SIZE = 80;
-int EDGE_OFFSET = 40;
-int CELL_GAP = 1;
+const uint8_t CELL_SIZE = 80;
+const uint8_t EDGE_OFFSET = 40;
+const uint8_t CELL_GAP = 1;
 
-int CELLA1_X2 = my_lcd.Get_Display_Width() - EDGE_OFFSET;
-int CELLA1_X1 = CELLA1_X2 - CELL_SIZE;
-int CELLA1_Y1 = EDGE_OFFSET;
-int CELLA1_Y2 = CELLA1_Y1 + CELL_SIZE;
+const uint16_t CELLA1_X2 = my_lcd.Get_Display_Width() - EDGE_OFFSET;
+const uint16_t CELLA1_X1 = CELLA1_X2 - CELL_SIZE;
+const uint16_t CELLA1_Y1 = EDGE_OFFSET;
+const uint16_t CELLA1_Y2 = CELLA1_Y1 + CELL_SIZE;
 
-int CELLA2_X2 = CELLA1_X1 - CELL_GAP;
-int CELLA2_X1 = CELLA1_X1 - CELL_GAP - CELL_SIZE;
-int CELLA2_Y1 = EDGE_OFFSET;
-int CELLA2_Y2 = CELLA2_Y1 + CELL_SIZE;
+const uint16_t CELLA2_X2 = CELLA1_X1 - CELL_GAP;
+const uint16_t CELLA2_X1 = CELLA1_X1 - CELL_GAP - CELL_SIZE;
+const uint16_t CELLA2_Y1 = EDGE_OFFSET;
+const uint16_t CELLA2_Y2 = CELLA2_Y1 + CELL_SIZE;
 
-int CELLA3_X2 = CELLA2_X1 - CELL_GAP;
-int CELLA3_X1 = CELLA2_X1 - CELL_GAP - CELL_SIZE;
-int CELLA3_Y1 = EDGE_OFFSET;
-int CELLA3_Y2 = CELLA3_Y1 + CELL_SIZE;
+const uint16_t CELLA3_X2 = CELLA2_X1 - CELL_GAP;
+const uint16_t CELLA3_X1 = CELLA2_X1 - CELL_GAP - CELL_SIZE;
+const uint16_t CELLA3_Y1 = EDGE_OFFSET;
+const uint16_t CELLA3_Y2 = CELLA3_Y1 + CELL_SIZE;
 
-int CELLB1_X1 = CELLA1_X1;
-int CELLB1_X2 = CELLA1_X2;
-int CELLB1_Y1 = CELLA1_Y2 + CELL_GAP;
-int CELLB1_Y2 = CELLB1_Y1 + CELL_SIZE;
+const uint16_t CELLB1_X1 = CELLA1_X1;
+const uint16_t CELLB1_X2 = CELLA1_X2;
+const uint16_t CELLB1_Y1 = CELLA1_Y2 + CELL_GAP;
+const uint16_t CELLB1_Y2 = CELLB1_Y1 + CELL_SIZE;
 
-int CELLB2_X1 = CELLA2_X1;
-int CELLB2_X2 = CELLA2_X2;
-int CELLB2_Y1 = CELLA2_Y2 + CELL_GAP;
-int CELLB2_Y2 = CELLB2_Y1 + CELL_SIZE;
+const uint16_t CELLB2_X1 = CELLA2_X1;
+const uint16_t CELLB2_X2 = CELLA2_X2;
+const uint16_t CELLB2_Y1 = CELLA2_Y2 + CELL_GAP;
+const uint16_t CELLB2_Y2 = CELLB2_Y1 + CELL_SIZE;
 
-int CELLB3_X1 = CELLA3_X1;
-int CELLB3_X2 = CELLA3_X2;
-int CELLB3_Y1 = CELLA3_Y2 + CELL_GAP;
-int CELLB3_Y2 = CELLB3_Y1 + CELL_SIZE;
+const uint16_t CELLB3_X1 = CELLA3_X1;
+const uint16_t CELLB3_X2 = CELLA3_X2;
+const uint16_t CELLB3_Y1 = CELLA3_Y2 + CELL_GAP;
+const uint16_t CELLB3_Y2 = CELLB3_Y1 + CELL_SIZE;
 
-int CELLC1_X1 = CELLB1_X1;
-int CELLC1_X2 = CELLB1_X2;
-int CELLC1_Y1 = CELLB1_Y2 + CELL_GAP;
-int CELLC1_Y2 = CELLC1_Y1 + CELL_SIZE;
+const uint16_t CELLC1_X1 = CELLB1_X1;
+const uint16_t CELLC1_X2 = CELLB1_X2;
+const uint16_t CELLC1_Y1 = CELLB1_Y2 + CELL_GAP;
+const uint16_t CELLC1_Y2 = CELLC1_Y1 + CELL_SIZE;
 
-int CELLC2_X1 = CELLB2_X1;
-int CELLC2_X2 = CELLB2_X2;
-int CELLC2_Y1 = CELLB2_Y2 + CELL_GAP;
-int CELLC2_Y2 = CELLC2_Y1 + CELL_SIZE;
+const uint16_t CELLC2_X1 = CELLB2_X1;
+const uint16_t CELLC2_X2 = CELLB2_X2;
+const uint16_t CELLC2_Y1 = CELLB2_Y2 + CELL_GAP;
+const uint16_t CELLC2_Y2 = CELLC2_Y1 + CELL_SIZE;
 
-int CELLC3_X1 = CELLB3_X1;
-int CELLC3_X2 = CELLB3_X2;
-int CELLC3_Y1 = CELLB3_Y2 + CELL_GAP;
-int CELLC3_Y2 = CELLC3_Y1 + CELL_SIZE;
-
+const uint16_t CELLC3_X1 = CELLB3_X1;
+const uint16_t CELLC3_X2 = CELLB3_X2;
+const uint16_t CELLC3_Y1 = CELLB3_Y2 + CELL_GAP;
+const uint16_t CELLC3_Y2 = CELLC3_Y1 + CELL_SIZE;
 
 void show_string(char *str,int16_t x,int16_t y,uint8_t csize,uint16_t fc, uint16_t bc,boolean mode)
 {
