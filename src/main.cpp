@@ -281,6 +281,7 @@ int changeBrightness(int brightnessLevel) {
         BRIGHTNESS = 255;
     }
     FastLED.setBrightness(BRIGHTNESS);
+    FastLED.show();
 }
 
 int resetGame() {
@@ -291,4 +292,5 @@ int resetGame() {
         cellsState[i] = 0;
     }
     resetMusic();
+    FastLED.show();
 }
